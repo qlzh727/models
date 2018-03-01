@@ -1,0 +1,35 @@
+# Copyright 2018 The TensorFlow Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+Summary:
+    As the official models become more mature, it is useful to create utility code that can be
+  shared between multiple models. What is unusual is that a very common use pattern if to run code
+  from within the "package" without ever formally installing it. For instance:
+
+    $ git clone https://github.com/tensorflow/models.git
+    $ cd models/official/resnet
+    $ python cifar10_main.py -h
+
+  Python doesn't really have a great way to import from within one's own package automagically.
+
+Possible Solutions:
+  Solution 0:
+    Make people add the directory to their PYTHONPATH, and provide some instructions in the README.
+
+  Solution 1:
+    Put a bit of code before the model imports to make sure sys.path has the necessary value.
+
+  Solution 2:
+    Have a python script to handle path mangling, and symlink and import everywhere.
